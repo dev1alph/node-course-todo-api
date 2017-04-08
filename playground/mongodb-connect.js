@@ -1,4 +1,6 @@
-const MongoClient = require('mongodb').MongoClient;
+//const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb');
+
 
 //in MongoDB you dont have to create DB first
 //like here we didnt create TodoApp DB but mentioned
