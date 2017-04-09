@@ -144,6 +144,7 @@ app.post('/users', (req, res) => {
 });
 
 
+
 // authenticate is middleware
 app.get('/users/me', authenticate, (req, res) => {
     res.send(req.user);
