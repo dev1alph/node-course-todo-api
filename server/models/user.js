@@ -60,6 +60,43 @@ UserSchema.methods.generateAuthToken = function () {
 
 };
 
+
+
+// .statics kind of .methods but anything you add on to it turned out to be
+//   model method as oppesed to instance method in .methods
+UserSchema.statics.findByToken = function (token) {
+    var User = this;
+    var decoded;
+
+    try{
+        decoded = jwt.verify(token, 'abc123');
+    }catch(e){
+
+        // return new Promise((resolve, reject) =>{
+        //    reject();
+        // });
+
+        return Promise.reject(); // same as above code but shorter version
+    }
+
+    return User.findOne({
+       '_id': decoded._id,
+       'tokens.token': token,   // ' ' qoutes are required coz we are using dot (.)
+       'tokens.access': 'auth'
+    });
+
+};
+
+
+
+
+
+
+
+
+
+
+
 var User = mongoose.model('User', UserSchema);
 
 module.exports = {User};
